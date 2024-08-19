@@ -51,8 +51,9 @@ def disponibilidadTurno(dia, mes, turno, anio):
     '''Nos dice si hay alguna cancha disponible o no. En caso de que haya una disponible, nos dice cual. Recibe como entrada el dia, mes y turno deseado para la reserva y la lista de matrices del año. Tiene como salida un string que nos dice la disponibilidad de las canchas.'''
 
     semana = definirSemana(definirCantDiasTotales(dia, mes))
-    queDiaCae = diaDeLaSemana(dia)
+    queDiaCae = diaDeLaSemana(definirCantDiasTotales(dia, mes))
     disponible = ''
+    valor = anio[semana][turno][queDiaCae]
     if(anio[semana][turno][queDiaCae] == '111'):
         disponible = 'No hay cancha'
     else:
@@ -62,4 +63,39 @@ def disponibilidadTurno(dia, mes, turno, anio):
             disponible = 'Cancha 2'
         elif(anio[semana][turno][queDiaCae] == '110'):
             disponible = 'Cancha 3'
-    return disponible
+    return disponible, valor
+
+def insertarTurnoAux(dia, mes, turno, anio):
+    semana = definirSemana(definirCantDiasTotales(dia, mes))
+    queDiaCae = diaDeLaSemana(definirCantDiasTotales(dia, mes))
+    disponibilidad, valor = disponibilidadTurno(dia, mes, turno, anio)
+    flag = -1
+    if (disponibilidad != 'No hay cancha'):
+        if(disponibilidad == 'Cancha 1'):
+            if(valor == '000'):
+                anio[semana][turno][queDiaCae] = '100'
+            elif(valor == '010'):
+                anio[semana][turno][queDiaCae] = '110'
+            elif(valor == '001'):
+                anio[semana][turno][queDiaCae] = '101'
+            elif(valor == '011'):
+                anio[semana][turno][queDiaCae] = '111'
+        if(disponibilidad == 'Cancha 2'):
+            if(valor == '100'):
+                anio[semana][turno][queDiaCae] = '110'
+            elif(valor == '101'):
+                anio[semana][turno][queDiaCae] = '111'
+        if(disponibilidad == 'Cancha 3'):
+            anio[semana][turno][queDiaCae] = '111'
+        flag = 1
+    else:
+        flag = -1
+    
+    return flag
+    
+def insertarTurno(dia, mes, turno, anio):
+    if(insertarTurnoAux(dia, mes, turno, anio) == 1):
+        print('Turno agendado.')
+    elif(insertarTurnoAux(dia, mes, turno, anio) == -1):
+        print('Horario NO disponible.')
+
