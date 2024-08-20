@@ -57,15 +57,22 @@ def disponibilidadTurno(dia, mes, turno, anio):
     if(anio[semana][turno][queDiaCae] == '111'):
         disponible = 'No hay cancha'
     else:
-        if(anio[semana][turno][queDiaCae] == '000' or anio[semana][turno][queDiaCae] == '010' or anio[semana][turno][queDiaCae] == '001' or anio[semana][turno][queDiaCae] == '011'):
+        cancha1Vacia = ['000', '010', '001', '011']
+        cancha2Vacia = ['100', '101']
+        cancha3Vacia = ['110']
+        if(anio[semana][turno][queDiaCae] in cancha1Vacia):
             disponible = 'Cancha 1'
-        elif(anio[semana][turno][queDiaCae] == '100' or anio[semana][turno][queDiaCae] == '101'):
+        elif(anio[semana][turno][queDiaCae] in cancha2Vacia):
             disponible = 'Cancha 2'
-        elif(anio[semana][turno][queDiaCae] == '110'):
+        elif(anio[semana][turno][queDiaCae] in cancha3Vacia):
             disponible = 'Cancha 3'
     return disponible, valor
 
 def insertarTurnoAux(dia, mes, turno, anio):
+
+    """Modifica el valor en la tabla para reservar un turno nuevo si está disponible, si no está disponible no hace nada.
+    Toma como entradas el dia, mes y turno y la lista de matrices y devuelve si el turno fue reservado o no."""
+
     semana = definirSemana(definirCantDiasTotales(dia, mes))
     queDiaCae = diaDeLaSemana(definirCantDiasTotales(dia, mes))
     disponibilidad, valor = disponibilidadTurno(dia, mes, turno, anio)
