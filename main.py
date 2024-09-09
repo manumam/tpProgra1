@@ -1,3 +1,5 @@
+from usuarios.py import usuarios
+
 def iniciarCalendarioSemanal():
 
     '''Inicia una matriz de 17 filas y 8 columnas con todos los campos con el valor '000'. No tiene entradas y tiene como salida la matriz generada.'''
@@ -100,25 +102,14 @@ def insertarTurno(dia, mes, turno, anio):
         print('Horario NO disponible.')
 
 # # # # # PROGRAMA PRINCIPAL
-
-mmamciz={
-    'nombre':'Manuel Mamciz',
-    'password':'mmamciz2024',
-    'legajo': 1196550
-}
-farias={
-    'nombre': 'Francisco Arias',
-    'password': '',
-    'legajo': 1196993
-}
-varnal={
-    'nombre': 'Vito Arnal',
-    'password': '',
-    'legajo': 1193038
-}
-
 def verificarUsuario():
-    users = ['mmamciz', 'farias', 'varnal']
+
+    """Verifica si el usuario y la contraseña y existen y son correctos entre si"""
+
+    usuarios = []
+    for i in range(usuarios):
+        usuarios.append(usuarios)
+    
     user = input(str('Bienvenido al sistema. Ingrese su nombre de usuario. '))
     verificacion = False
     if(user in users):
