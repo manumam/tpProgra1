@@ -105,4 +105,3 @@ def insertarTurno(dia, mes, turno, anio):
         print('Turno agendado.')
     elif(insertarTurnoAux(dia, mes, turno, anio) == -1):
         print('Horario NO disponible.')
-
