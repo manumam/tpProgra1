@@ -99,3 +99,34 @@ def insertarTurno(dia, mes, turno, anio):
     elif(insertarTurnoAux(dia, mes, turno, anio) == -1):
         print('Horario NO disponible.')
 
+# # # # # PROGRAMA PRINCIPAL
+
+mmamciz={
+    'nombre':'Manuel Mamciz',
+    'password':'mmamciz2024',
+    'legajo': 1196550
+}
+farias={
+    'nombre': 'Francisco Arias',
+    'password': '',
+    'legajo': 1196993
+}
+varnal={
+    'nombre': 'Vito Arnal',
+    'password': '',
+    'legajo': 1193038
+}
+
+def verificarUsuario():
+    users = ['mmamciz', 'farias', 'varnal']
+    user = input(str('Bienvenido al sistema. Ingrese su nombre de usuario. '))
+    verificacion = False
+    if(user in users):
+        pwd = input(str('Ingrese su contraseña. '))
+        verificacion = user['password'] == pwd
+    else:
+        print('ERROR')
+    
+    return verificacion
+
+verificarUsuario()
