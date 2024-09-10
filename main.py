@@ -1,4 +1,5 @@
-from usuarios.py import usuarios
+from usuarios import users
+from stock import stockConsumibles
 
 def iniciarCalendarioSemanal():
 
@@ -102,22 +103,28 @@ def insertarTurno(dia, mes, turno, anio):
         print('Horario NO disponible.')
 
 # # # # # PROGRAMA PRINCIPAL
+
+anio = iniciarCalendarioAnual()
+
+totalRecaudado = 0
+
 def verificarUsuario():
 
     """Verifica si el usuario y la contraseña y existen y son correctos entre si"""
 
-    usuarios = []
-    for i in range(usuarios):
-        usuarios.append(usuarios)
+    nombresUsuarios = []
+    for i in range(len(users)):
+        nombresUsuarios.append(users[i]['id'])
     
     user = input(str('Bienvenido al sistema. Ingrese su nombre de usuario. '))
     verificacion = False
-    if(user in users):
+    if(user in nombresUsuarios):
         pwd = input(str('Ingrese su contraseña. '))
-        verificacion = user['password'] == pwd
+        for i in range(len(users)):
+            if(users[i]['id'] == user):
+                verificacion = users[i]['password'] == pwd
+                return verificacion
     else:
-        print('ERROR')
+        return verificacion
     
-    return verificacion
-
-verificarUsuario()
+print(verificarUsuario())
