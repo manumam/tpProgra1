@@ -1,4 +1,3 @@
-from main import anio
 from stock import stockConsumibles
 
 precioCancha = 18000
@@ -32,6 +31,8 @@ def iniciarCalendarioAnual():
         anio.append(semana)
     return anio
 
+anio = iniciarCalendarioAnual()
+
 def definirCantDiasTotales(dia, mes):
     
     '''Define cuantos dias pasaron en el año para un determinado dia de un determinado mes. Recibe como entradas el dia y el mes y tiene como salida el numero de dias que pasaron hasta esa fecha en el año.'''
@@ -52,12 +53,7 @@ def definirSemana(dia):
     semana = semana + (dia // 7)
     return semana 
 
-def diaDeLaSemana(dia):
-    
-    '''Define que dia de la semana cae el dia que consultamos. Recibe como entrada un entero y tiene como salida un entero.'''
-
-    diaDeLaSemana = dia % 7
-    return diaDeLaSemana
+diaDeLaSemana = lambda dia : dia % 7
 
 def disponibilidadTurno(dia, mes, turno, anio):
     
@@ -79,11 +75,15 @@ def disponibilidadTurno(dia, mes, turno, anio):
     return disponible, valor
 
 def insertarTurnoAux(dia, mes, turno, anio):
+
+    '''Esta funcion inserta un turno nuevo en el sistema modificando la matriz central. Recibe el dia, mes y turno junto con la matriz central y no tiene valor de salida.'''
+
     semana = definirSemana(definirCantDiasTotales(dia, mes))
     queDiaCae = diaDeLaSemana(definirCantDiasTotales(dia, mes))
     disponibilidad, valor = disponibilidadTurno(dia, mes, turno, anio)
     flag = -1
     if (disponibilidad != 0):
+        flag = 1
         if(disponibilidad == 1):
             if(valor == '000'):
                 anio[semana][turno][queDiaCae] = '100'
@@ -100,94 +100,115 @@ def insertarTurnoAux(dia, mes, turno, anio):
                 anio[semana][turno][queDiaCae] = '111'
         if(disponibilidad == 3):
             anio[semana][turno][queDiaCae] = '111'
-        flag = 1
     else:
         flag = -1
     
     return flag
     
 def insertarTurno(dia, mes, turno, anio):
-    if(insertarTurnoAux(dia, mes, turno, anio) == 1):
+
+    '''Esta funcion llama a la funcion insertarTurnoAux e imprime un mensaje dependiendo del resultado de este llamado. Recibe como parametros el dia, mes y turno junto con la matriz central y tiene como salida los mensajes mencionados anteriormente.'''
+
+
+    status = insertarTurnoAux(dia, mes, turno, anio)
+    if(status == 1):
         print('Turno agendado.')
-    elif(insertarTurnoAux(dia, mes, turno, anio) == -1):
+    elif(status == -1):
         print('Horario NO disponible.')
 
 def consultarDisponibilidadMenu():
+
+    '''Esta funcion pide al usuario los datos de un turno y luego llama a la funcion disponibilidad turno con esos datos. A partir del resultado de ese llamado imprime un mensaje. No recibe parametros y tiene mensajes por consola como salida.'''
+
     flag = 0
-    mes = input(int('Qué mes desea consultar? '))
-    dia = input(int('Qué dia desea consultar? '))
-    turno = input(int('En que horario desea? '))
-    if(disponibilidadTurno(dia, mes, turno, anio) == 0):
+    mes = int(input('Qué mes desea consultar? '))
+    dia = int(input('Qué dia desea consultar? '))
+    turno = int(input('En que horario desea? '))
+    disponibilidad, valor = disponibilidadTurno(dia, mes, turno, anio)
+    if(disponibilidad == 0):
         print('No hay cancha disponible para el dia y turno seleccionado.')
-    elif(disponibilidadTurno(dia, mes, turno, anio) in [1,2,3]):
+    elif(disponibilidad in [1,2,3]):
         print('Hay cancha disponible para el dia y turno seleccionado. Desea reservar el turno? ')
-        reservar = input(int('Ingrese 1 si desea hacer la reserva sobre este dia y horario o 2 si no lo desea.'))
+        reservar = int(input('Ingrese 1 si desea hacer la reserva sobre este dia y horario o 2 si no lo desea.'))
         if(reservar == 1):
             insertarTurno(dia,mes,turno,anio)
     flag = 1
     return flag
 
 def tomarReservaMenu():
+
+    '''Esta funcion pide al usuario los datos de un turno y luego llama a la funcion disponibilidad turno con esos datos. A partir del resultado de ese llamado inserta un turno o imprime un mensaje. No recibe parametros y tiene mensajes por consola como salida.'''
+
     flag = 0
-    mes = input(int('Qué mes desea consultar? '))
-    dia = input(int('Qué dia desea consultar? '))
-    turno = input(int('En que horario desea? '))
-    if(disponibilidadTurno(dia, mes, turno, anio) in [1,2,3]):
+    mes = int(input('Qué mes desea consultar? '))
+    dia = int(input('Qué dia desea consultar? '))
+    turno = int(input('En que horario desea? '))
+    disponibilidad, valor = disponibilidadTurno(dia, mes, turno, anio)
+    if(disponibilidad in [1,2,3]):
         insertarTurno(dia,mes,turno,anio)
-    elif(disponibilidadTurno(dia, mes, turno, anio) == 0):
+    elif(disponibilidad == 0):
         print('No hay cancha disponible para el dia y turno seleccionado.')
     flag = 1
     return flag
 
 def cobrar():
-        dia = input(int('Ingrese el dia de hoy. '))
-        mes = input(int('Ingrese el mes actual. '))
-        turno = input(int('Ingrese el turno actual. '))
-        cancha = input(int('Ingrese la cancha que desea cobrar. '))
-        aCobrar = 0
-        if(cancha == 1):
-            if(disponibilidadTurno(dia, mes, turno, anio) in [0, 2, 3]):
-                aCobrar = precioCancha + consumiblesCancha1
-                totalRecaudado += aCobrar
-                print(f'El importe a cobrar es de {aCobrar}.')
-            else:
-                print('ERROR. Turno ingresado disponible.')
-        elif(cancha == 2):
-            if(disponibilidadTurno(dia, mes, turno, anio) in [0, 3]):
-                aCobrar = precioCancha + consumiblesCancha2
-                totalRecaudado += aCobrar
-                print(f'El importe a cobrar es de {aCobrar}.')
-            else:
-                print('ERROR. Turno ingresado disponible.')
-        elif(cancha == 3):
-            if(disponibilidadTurno(dia, mes, turno, anio) == 0):
-                aCobrar = precioCancha + consumiblesCancha3
-                totalRecaudado += aCobrar
-                print(f'El importe a cobrar es de {aCobrar}.')
-            else:
-                print('ERROR. Turno ingresado disponible.')
-        
-imprimirPrecioCancha = lambda : print(f'El precio de la cancha por 1 hora es de: {precioCancha}')
 
-imprimirRecaudacion = lambda : print(f'El total recaudado es de {totalRecaudado}')
+    '''Esta funcion cobra la cuenta de una cancha para un dia, mes y horario particular del año. Suma esa cifra a lo recaudado total y obtiene la cuenta de las variables globales definidas al principio de este documento. No recibe parametros de entrada y tiene como salida un mensaje incluyendo el total a cobrar.'''
+
+    dia = int(input('Ingrese el dia de hoy. '))
+    mes = int(input('Ingrese el mes actual. '))
+    turno = int(input('Ingrese el turno actual. '))
+    cancha = int(input('Ingrese la cancha que desea cobrar. '))
+    aCobrar = 0
+    global totalRecaudado
+    disponibilidad, valor = disponibilidadTurno(dia, mes, turno, anio)
+    if(cancha == 1):
+        if(disponibilidad in [0, 2, 3]):
+            aCobrar = precioCancha + consumiblesCancha1
+            totalRecaudado += aCobrar
+            print(f'El importe a cobrar es de {aCobrar}.')
+        else:
+            print('ERROR. Turno ingresado disponible.')
+    elif(cancha == 2):
+        if(disponibilidad in [0, 3]):
+            aCobrar = precioCancha + consumiblesCancha2
+            totalRecaudado = totalRecaudado + aCobrar
+            print(f'El importe a cobrar es de {aCobrar}.')
+        else:
+            print('ERROR. Turno ingresado disponible.')
+    elif(cancha == 3):
+        if(disponibilidad == 0):
+            aCobrar = precioCancha + consumiblesCancha3
+            totalRecaudado = totalRecaudado + aCobrar
+            print(f'El importe a cobrar es de {aCobrar}.')
+        else:
+            print('ERROR. Turno ingresado disponible.')
+        
 
 def venderConsumibles():
-    cancha = input(int('A que cancha desea cargar esta compra? '))
-    producto = 0
+
+    '''Esta funcion muestra una lista de todos los productos consumibles disponibles para comprar y pide al usuario ingresar qué articulos desea agregar a la cuenta. A medida que se ingresan los va sumando a la cuenta de la cancha. No tiene parametros de entrada salida, solo modifica el valor de la cuenta.'''
+
+    cancha = int(input('A que cancha desea cargar esta compra? '))
+    producto = 1
+    global consumiblesCancha1
+    global consumiblesCancha2
+    global consumiblesCancha3
     print('Los articulos disponibles son: ')
     while(producto != -1):
         for _ in range(len(stockConsumibles)):
             if(stockConsumibles[_]['stockRestante'] > 0):
-                print(f'{stockConsumibles[_]['id']}. {stockConsumibles[_]['producto']} \n')
-        producto = input(int('Ingrese el numero del producto que desea agregar a la cuenta. Ingrese -1 para finalizar.'))
+                print(f'{stockConsumibles[_]['id']}. {stockConsumibles[_]['producto']} - ${stockConsumibles[_]['precio']} \n')
         if(cancha == 1):
             consumiblesCancha1 += stockConsumibles[producto - 1]['precio'] 
         elif(cancha == 2):
             consumiblesCancha2 += stockConsumibles[producto - 1]['precio'] 
-        elif(cancha == 3):
+        elif(cancha == 3):            
             consumiblesCancha3 += stockConsumibles[producto - 1]['precio']
-
-
-    
-
-    
+        producto = int(input('Ingrese el numero del producto que desea agregar a la cuenta. Ingrese -1 para finalizar. '))
+    if(cancha == 1):
+        consumiblesCancha1 = consumiblesCancha1 - 1500
+    elif(cancha == 2):
+        consumiblesCancha2 = consumiblesCancha2 - 1500
+    elif(cancha == 3):
+        consumiblesCancha3 = consumiblesCancha3 - 1500

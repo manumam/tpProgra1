@@ -10,10 +10,10 @@ def verificarUsuario():
     for i in range(len(users)):
         nombresUsuarios.append(users[i]['id'])
     
-    user = input(str('Bienvenido al sistema. Ingrese su nombre de usuario. '))
+    user = str(input('Bienvenido al sistema. Ingrese su nombre de usuario. '))
     verificacion = False
     if(user in nombresUsuarios):
-        pwd = input(str('Ingrese su contraseña. '))
+        pwd = str(input('Ingrese su contraseña. '))
         for i in range(len(users)):
             if(users[i]['id'] == user):
                 verificacion = users[i]['password'] == pwd

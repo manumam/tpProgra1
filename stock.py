@@ -16,6 +16,12 @@ stockConsumibles = [
         'id': 3,
         'precio': 1200,
         'stockRestante': 70
+    },
+    {
+        'producto': 'Sprite',
+        'id': 4,
+        'precio': 1200,
+        'stockRestante': 70
     }
 
 ]
