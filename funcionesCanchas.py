@@ -124,6 +124,7 @@ def consultarDisponibilidadMenu():
     mes = int(input('Qué mes desea consultar? '))
     dia = int(input('Qué dia desea consultar? '))
     turno = int(input('En que horario desea? '))
+    turno = turno - 7
     disponibilidad, valor = disponibilidadTurno(dia, mes, turno, anio)
     if(disponibilidad == 0):
         print('No hay cancha disponible para el dia y turno seleccionado.')
@@ -143,6 +144,7 @@ def tomarReservaMenu():
     mes = int(input('Qué mes desea consultar? '))
     dia = int(input('Qué dia desea consultar? '))
     turno = int(input('En que horario desea? '))
+    turno = turno - 7
     disponibilidad, valor = disponibilidadTurno(dia, mes, turno, anio)
     if(disponibilidad in [1,2,3]):
         insertarTurno(dia,mes,turno,anio)
@@ -158,6 +160,7 @@ def cobrar():
     dia = int(input('Ingrese el dia de hoy. '))
     mes = int(input('Ingrese el mes actual. '))
     turno = int(input('Ingrese el turno actual. '))
+    turno = turno - 7
     cancha = int(input('Ingrese la cancha que desea cobrar. '))
     aCobrar = 0
     global totalRecaudado
@@ -211,7 +214,10 @@ def venderConsumibles():
         producto = int(input('Ingrese el numero del producto que desea agregar a la cuenta. Ingrese -1 para finalizar. '))
     if(cancha == 1):
         consumiblesCancha1 = consumiblesCancha1 - 1500
+        print(f'La cuenta de la cancha 1 esta en {consumiblesCancha1}')
     elif(cancha == 2):
         consumiblesCancha2 = consumiblesCancha2 - 1500
+        print(f'La cuenta de la cancha 2 esta en {consumiblesCancha2}')
     elif(cancha == 3):
         consumiblesCancha3 = consumiblesCancha3 - 1500
+        print(f'La cuenta de la cancha 3 esta en {consumiblesCancha3}')
