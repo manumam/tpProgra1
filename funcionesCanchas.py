@@ -200,11 +200,14 @@ def venderConsumibles():
             if(stockConsumibles[_]['stockRestante'] > 0):
                 print(f'{stockConsumibles[_]['id']}. {stockConsumibles[_]['producto']} - ${stockConsumibles[_]['precio']} \n')
         if(cancha == 1):
-            consumiblesCancha1 += stockConsumibles[producto - 1]['precio'] 
+            consumiblesCancha1 += stockConsumibles[producto - 1]['precio']
+            stockConsumibles[producto - 1]['stockRestante'] = stockConsumibles[producto - 1]['stockRestante'] - 1
         elif(cancha == 2):
-            consumiblesCancha2 += stockConsumibles[producto - 1]['precio'] 
+            consumiblesCancha2 += stockConsumibles[producto - 1]['precio']
+            stockConsumibles[producto - 1]['stockRestante'] = stockConsumibles[producto - 1]['stockRestante'] - 1
         elif(cancha == 3):            
             consumiblesCancha3 += stockConsumibles[producto - 1]['precio']
+            stockConsumibles[producto - 1]['stockRestante'] = stockConsumibles[producto - 1]['stockRestante'] - 1
         producto = int(input('Ingrese el numero del producto que desea agregar a la cuenta. Ingrese -1 para finalizar. '))
     if(cancha == 1):
         consumiblesCancha1 = consumiblesCancha1 - 1500
