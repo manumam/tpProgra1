@@ -9,14 +9,14 @@ users = [
     {
         'id': 'farias',
         'nombre': 'Francisco Arias',
-        'password': '',
+        'password': 'farias2024',
         'legajo': 1196993,
         'rol': 'ADMIN'
     },
     {
         'id':'varnal',
         'nombre': 'Vito Arnal',
-        'password': '',
+        'password': 'varnal2024',
         'legajo': 1193038,
         'rol': 'ADMIN'
     }
