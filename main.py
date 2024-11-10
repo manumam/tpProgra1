@@ -1,5 +1,3 @@
-from usuarios import users
-from stock import stockConsumibles
 import funcionesCanchas
 import funcionesUsuarios
 
@@ -13,7 +11,7 @@ def desplegarMenu():
     print('----------------------------------------------------------------------- \n'
             'Bienvenido al sistema! \n'  
             'Qué desea hacer? \n'
-            '1. Usuarios (No disponible aún). \n'
+            '1. Usuarios. \n'
             '2. Canchas \n'
             '3. Estadísticas y reportes (No disponible aún). \n'
             '-----------------------------------------------------------------------')
@@ -21,6 +19,8 @@ def desplegarMenu():
     if(eleccionUsuario == 2):
         desplegarMenuCanchas()
         flag = 1
+    elif(eleccionUsuario == 1):
+        desplegarMenuUsuarios()
     return flag
 
 def desplegarMenuCanchas():
@@ -52,6 +52,20 @@ def desplegarMenuCanchas():
         desplegarMenu()
     flag = 1
     return flag
+
+def desplegarMenuUsuarios():
+    eleccionUsuario = 0
+    flag = 0
+    print('----------------------------------------------------------------------- \n'
+              'USUARIOS \n'  
+              'Qué desea hacer? \n'
+              '1. Consultar Disponibilidad. \n'
+              '2. Tomar reserva. \n'
+              '3. Cobrar una cancha. \n'
+              '4. Vender consumibles. \n'
+              '-----------------------------------------------------------------------')
+    eleccionUsuario = int(input('Ingrese el numero correspondiente a la opción deseada: '))
+
 
 def main():
     if(funcionesUsuarios.verificarUsuario()):

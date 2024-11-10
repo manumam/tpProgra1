@@ -1,0 +1,16 @@
+[
+    {
+        "id": 76,
+        "nombre": "Manuel",
+        "apellido": "Mamciz",
+        "status": "ADMIN",
+        "pwd": "Manuel23"
+    },
+    {
+        "id": 78,
+        "nombre": "Bill",
+        "apellido": "Gates",
+        "status": "EMPLOYEE",
+        "pwd": ""
+    }
+]

@@ -25,7 +25,7 @@ Funcionalidades:
       - Agregar un usuario nuevo.
       - Eliminar un usuario existente.
       - Modificar la información de algun usuario, incluyendo la contraseña.
-      - Añadir nuevo productos a la tienda.
+      - Añadir nuevos productos a la tienda.
       - Recargar stock de un producto existente y cuyo stock esté cercano al cero (0).
       - Modificar precio de algun producto existente.
       
