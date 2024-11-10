@@ -4,12 +4,11 @@ import re
 
 usuarioEnSesion = ''
 
-def verificarUsuario():
+def verificarUsuario(id):
 
     """Verifica si el usuario y la contrasena y existen y son correctos entre si. No recibe parametros y tiene como salida un valor booleano."""
 
     validacion = False
-    user = int(input('Ingrese su id de usuario. '))
     try:
         with open("usuarios.json", "rt") as archivo:
             usuarios = json.load(archivo)
@@ -21,7 +20,7 @@ def verificarUsuario():
     except:
         print('Error al acceder al archivo. ')
     
-    return validacion
+    return validacion, user
     
 ########################################### PRODUCTOS #################################################
 
@@ -128,6 +127,19 @@ def modificarStock(id):
     except IOError:
         print("Error al cargar el archivo. ")
 
+def mostrarProductos():
+    try:
+        with open("stock.json", "rt") as stock:
+            productos = json.load(stock)
+    except IOError:
+        print("Error al ingresar al archivo. ")
+    
+    for producto in productos:
+        print(f"{producto["id"]}. {producto["producto"]} ${producto["precio"]}")
+    
+
+
+
 
 ########################################### USUARIOS #################################################
 
@@ -144,6 +156,19 @@ def validarIDUsuarios(id):
         print(e)
     
     return validacion
+
+def status(id):
+    try:
+        with open("usuarios.json", "rt") as users:
+            usuarios = json.load(users)
+    except IOError:
+        print("Error al acceder al archivo. ")
+
+    for usuario in usuarios:
+        if(usuario["id"] == id):
+            status = usuario["status"]
+    
+    return status
 
 def obtenerPosicionPorUsuario(id):
     try:
@@ -294,3 +319,13 @@ def cambiarStatus(id):
             json.dump(usuarios, users, indent=4)
     except IOError:
         print("Error al intentar acceder al archivo. ")
+
+def mostrarUsuarios():
+    try:
+        with open("usuarios.json", "rt") as users:
+            usuarios = json.load(users)
+    except IOError:
+        print("Error al acceder al archivo. ")
+
+    for usuario in usuarios:
+        print(f"{usuario["id"]}. {usuario["nombre"]} {usuario["apellido"]} - {usuario["status"]}")

@@ -32,8 +32,6 @@ def iniciarCalendarioAnual():
         anio.append(semana)
     return anio
 
-anio = iniciarCalendarioAnual()
-
 def definirCantDiasTotales(dia, mes):
     
     '''Define cuantos dias pasaron en el año para un determinado dia de un determinado mes. Recibe como entradas el dia y el mes y tiene como salida el numero de dias que pasaron hasta esa fecha en el año.'''
