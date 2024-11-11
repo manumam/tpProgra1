@@ -14,13 +14,13 @@ def verificarUsuario(id):
             usuarios = json.load(archivo)
 
             for usuario in usuarios:
-                if (usuario["id"] == user):
+                if (usuario["id"] == id):
                     pwd = str(input('Ingrese su contrasena. '))
                     validacion = pwd == usuario["pwd"]
     except:
         print('Error al acceder al archivo. ')
     
-    return validacion, user
+    return validacion
     
 ########################################### PRODUCTOS #################################################
 
