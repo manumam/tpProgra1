@@ -320,6 +320,27 @@ def cambiarStatus(id):
     except IOError:
         print("Error al intentar acceder al archivo. ")
 
+def eliminarUsuario(id):
+    try:
+        with open("usuarios.json", "rt") as users:
+            usuarios = json.load(users)
+    except IOError:
+        print("Error al ingresar al archivo. ")
+    
+    indice = 0
+    while (usuarios[indice]["id"] != id):
+        indice = indice + 1
+
+    usuarios.pop(indice)
+
+    try:
+        with open("usuarios.json", "wt") as users:
+            json.dump(usuarios, users, indent=4)
+    except IOError:
+        print("Error al intentar acceder al archivo. ")
+        
+
+
 def mostrarUsuarios():
     try:
         with open("usuarios.json", "rt") as users:

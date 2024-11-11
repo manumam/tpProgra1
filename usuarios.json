@@ -1,12 +1,5 @@
 [
     {
-        "id": 78,
-        "nombre": "Bill",
-        "apellido": "Gates",
-        "status": "EMPLOYEE",
-        "pwd": "Bill1234"
-    },
-    {
         "id": 25,
         "nombre": "Lionel",
         "apellido": "Messi",

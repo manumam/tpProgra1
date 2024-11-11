@@ -63,9 +63,10 @@ def desplegarMenuUsuarios(id):
               '4. Crear un usuario. (EXCLUSIVO PARA ADMIN) \n'
               '5. Administrar contraseña. (EXCLUSIVO PARA ADMIN)\n'
               '6. Modificar jerarquía de un usuario. (EXCLUSIVO PARA ADMIN)\n'
+              '7. Eliminar un usuario. (EXCLUSIVO PARA ADMIN)\n'
               '-----------------------------------------------------------------------')
     eleccionUsuario = int(input('Ingrese el numero correspondiente a la opción deseada: '))
-    if(funcionesUsuarios.status(id) == "EMPLOYEE" and eleccionUsuario in [4,5,6]):
+    if(funcionesUsuarios.status(id) == "EMPLOYEE" and eleccionUsuario in [4,5,6,7]):
         print("Este usuario no tiene permisos suficiente para realizar esta acción. ")
         desplegarMenu(id)
     else:
@@ -94,6 +95,11 @@ def desplegarMenuUsuarios(id):
             funcionesUsuarios.mostrarUsuarios()
             id = int(input("Ingrese el id del usuario que desea modificar. "))
             funcionesUsuarios.cambiarStatus(id)
+            desplegarMenu(id)
+        elif(eleccionUsuario == 7):
+            funcionesUsuarios.mostrarUsuarios()
+            id = int(input("Ingrese el id del usuario que desea eliminar. "))
+            funcionesUsuarios.eliminarUsuario(id)
             desplegarMenu(id)
         
 
