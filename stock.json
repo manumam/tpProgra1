@@ -1,0 +1,14 @@
+[
+    {
+        "id": 18,
+        "producto": "Gatorade Azul",
+        "precio": 1800,
+        "cantidad": 50
+    },
+    {
+        "id": 99,
+        "producto": "Gatorade Roja",
+        "precio": 1500,
+        "cantidad": 53
+    }
+]

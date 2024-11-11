@@ -1,4 +1,5 @@
-from stock import stockConsumibles
+import json
+from funcionesUsuarios import obtenerPosicionPorProducto
 
 precioCancha = 18000
 
@@ -186,7 +187,31 @@ def cobrar():
             print(f'El importe a cobrar es de {aCobrar}.')
         else:
             print('ERROR. Turno ingresado disponible.')
-        
+
+def deducirStock(id):
+    try:
+        with open("stock.json", "rt") as stock:
+            productos = json.load(stock)
+    except IOError:
+        print("Error al acceder al archivo. ")
+
+    for item in productos:
+        if (item["id"] == id):
+            producto = item["producto"]
+            precio = item["precio"]
+            cantidad = item["cantidad"] - 1
+    
+    registro = {"id": id, "producto": producto, "precio": precio, "cantidad": cantidad}
+    posicion = obtenerPosicionPorProducto(id)
+    productos.pop(posicion)
+    productos.append(registro)
+
+    try:
+        with open("stock.json", "wt") as stock:
+            json.dump(productos, stock, indent=4)
+    except IOError:
+        print("Error al intentar acceder al archivo.")
+
 
 def venderConsumibles():
 
@@ -198,26 +223,30 @@ def venderConsumibles():
     global consumiblesCancha2
     global consumiblesCancha3
     print('Los articulos disponibles son: ')
-    while(producto != -1):
-        for _ in range(len(stockConsumibles)):
-            if(stockConsumibles[_]['stockRestante'] > 0):
-                print(f'{stockConsumibles[_]['id']}. {stockConsumibles[_]['producto']} - ${stockConsumibles[_]['precio']} \n')
-        if(cancha == 1):
-            consumiblesCancha1 += stockConsumibles[producto - 1]['precio']
-            stockConsumibles[producto - 1]['stockRestante'] = stockConsumibles[producto - 1]['stockRestante'] - 1
-        elif(cancha == 2):
-            consumiblesCancha2 += stockConsumibles[producto - 1]['precio']
-            stockConsumibles[producto - 1]['stockRestante'] = stockConsumibles[producto - 1]['stockRestante'] - 1
-        elif(cancha == 3):            
-            consumiblesCancha3 += stockConsumibles[producto - 1]['precio']
-            stockConsumibles[producto - 1]['stockRestante'] = stockConsumibles[producto - 1]['stockRestante'] - 1
-        producto = int(input('Ingrese el numero del producto que desea agregar a la cuenta. Ingrese -1 para finalizar. '))
+    
+    try:
+        with open("stock.json", "rt") as stock:
+            productos = json.load(stock)
+    except IOError:
+        print("Error al acceder al archivo. ")
+
+    for producto in productos:
+        print(f"{producto["id"]}. {producto["producto"]} ${producto["precio"]}")
+
+    seleccionado = int(input('Ingrese el id del producto que desea agregar a la cuenta. Ingrese -1 para finalizar. '))
+    
+    for producto in productos:
+        if(producto["id"] == seleccionado):
+            precio = producto["precio"]
+
+    deducirStock(seleccionado)
+
     if(cancha == 1):
-        consumiblesCancha1 = consumiblesCancha1 - 1500
-        print(f'La cuenta de la cancha 1 esta en {consumiblesCancha1}')
+        consumiblesCancha1 = precio
+        print(consumiblesCancha1)
     elif(cancha == 2):
-        consumiblesCancha2 = consumiblesCancha2 - 1500
-        print(f'La cuenta de la cancha 2 esta en {consumiblesCancha2}')
+        consumiblesCancha2 = precio
+        print(consumiblesCancha2)
     elif(cancha == 3):
-        consumiblesCancha3 = consumiblesCancha3 - 1500
-        print(f'La cuenta de la cancha 3 esta en {consumiblesCancha3}')
+        consumiblesCancha3 = precio
+        print(consumiblesCancha3)
