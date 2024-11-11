@@ -16,12 +16,12 @@ def desplegarMenu(id):
             '-----------------------------------------------------------------------')
     eleccionUsuario = int(input('Ingrese el numero correspondiente a la opción deseada: '))
     if(eleccionUsuario == 2):
-        desplegarMenuCanchas()
+        desplegarMenuCanchas(id)
     elif(eleccionUsuario == 1):
         desplegarMenuUsuarios(id)
     return
 
-def desplegarMenuCanchas():
+def desplegarMenuCanchas(id):
 
     '''Esta funcion despliega el menu de operaciones de las canchas del programa. No tiene parametros de entrada y su salida es ejecutar la funcion que desea el usuario.'''
     
@@ -38,16 +38,16 @@ def desplegarMenuCanchas():
     eleccionUsuario = int(input('Ingrese el numero correspondiente a la opción deseada: '))
     if(eleccionUsuario == 1):
         funcionesCanchas.consultarDisponibilidadMenu()
-        desplegarMenu()
+        desplegarMenu(id)
     elif(eleccionUsuario == 2):
         funcionesCanchas.tomarReservaMenu()
-        desplegarMenu()
+        desplegarMenu(id)
     elif(eleccionUsuario == 3):
         funcionesCanchas.cobrar()
-        desplegarMenu()
+        desplegarMenu(id)
     elif(eleccionUsuario == 4):
         funcionesCanchas.venderConsumibles()
-        desplegarMenu()
+        desplegarMenu(id)
     flag = 1
     return flag
 
@@ -71,24 +71,30 @@ def desplegarMenuUsuarios(id):
     else:
         if(eleccionUsuario == 1):
             funcionesUsuarios.crearProducto()
+            desplegarMenu(id)
         elif(eleccionUsuario == 2):
             funcionesUsuarios.mostrarProductos()
             id = int(input("Ingrese el id del producto que desea modificar. "))
             funcionesUsuarios.modificarPrecio(id)
+            desplegarMenu(id)
         elif(eleccionUsuario == 3):
             funcionesUsuarios.mostrarProductos()
             id = int(input("Ingrese el id del producto que desea modificar. "))
             funcionesUsuarios.modificarStock(id)
+            desplegarMenu(id)
         elif(eleccionUsuario == 4):
             funcionesUsuarios.crearUsuario()
+            desplegarMenu(id)
         elif(eleccionUsuario == 5):
             funcionesUsuarios.mostrarUsuarios()
             id = int(input("Ingrese el id del usuario que desea modificar. "))
             funcionesUsuarios.administrarPassword(id)
+            desplegarMenu(id)
         elif(eleccionUsuario == 6):
             funcionesUsuarios.mostrarUsuarios()
             id = int(input("Ingrese el id del usuario que desea modificar. "))
             funcionesUsuarios.cambiarStatus(id)
+            desplegarMenu(id)
         
 
 

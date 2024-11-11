@@ -243,10 +243,7 @@ def venderConsumibles():
 
     if(cancha == 1):
         consumiblesCancha1 = precio
-        print(consumiblesCancha1)
     elif(cancha == 2):
         consumiblesCancha2 = precio
-        print(consumiblesCancha2)
     elif(cancha == 3):
         consumiblesCancha3 = precio
-        print(consumiblesCancha3)

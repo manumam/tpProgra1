@@ -150,7 +150,7 @@ def validarIDUsuarios(id):
             usuarios = json.load(archivo)
 
             for usuario in usuarios:
-                validacion = usuarios["id"] == id or validacion
+                validacion = usuario["id"] == id or validacion
         
     except Exception as e:
         print(e)

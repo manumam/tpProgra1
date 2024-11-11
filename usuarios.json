@@ -7,10 +7,17 @@
         "pwd": "Bill1234"
     },
     {
-        "id": 76,
-        "nombre": "Manuel",
-        "apellido": "Mamciz",
-        "status": "ADMIN",
-        "pwd": "Manuel12"
+        "id": 25,
+        "nombre": "Lionel",
+        "apellido": "Messi",
+        "status": "EMPLOYEE",
+        "pwd": ""
+    },
+    {
+        "id": 25,
+        "nombre": "Lionel",
+        "apellido": "Messi",
+        "status": "EMPLOYEE",
+        "pwd": "Messi2024"
     }
 ]

@@ -1,14 +1,20 @@
 [
     {
-        "id": 18,
-        "producto": "Gatorade Azul",
+        "id": 56,
+        "producto": "Gatorade Uva",
         "precio": 1800,
         "cantidad": 50
     },
     {
         "id": 99,
         "producto": "Gatorade Roja",
-        "precio": 1500,
+        "precio": 1800,
         "cantidad": 53
+    },
+    {
+        "id": 18,
+        "producto": "Gatorade Azul",
+        "precio": 1800,
+        "cantidad": 49
     }
 ]
